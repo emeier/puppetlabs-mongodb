@@ -91,7 +91,7 @@ Puppet::Type.type(:mongodb_user).provide(:mongodb, :parent => Puppet::Provider::
     if mongo_24?
       mongo_eval("db.removeUser('#{@resource[:username]}')")
     else
-      mongo_eval("db.dropUser('#{@resource[:username]}')")
+      mongo_eval("db.getSiblingDB('#{@resource[:database]}').dropUser('#{@resource[:username]}')")
     end
   end
 
